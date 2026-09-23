@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposta Técnica e Comercial — Banco BTG Pactual × Salesforce Professional Services</title>
+<style>
+:root {
+  --sf-navy:      #001E5B;
+  --sf-container: #022AC0;
+  --sf-blue:      #066AFE;
+  --sf-cloud:     #00B3FF;
+  --sf-bg:        #CFE9FE;
+  --sf-light-bg:  #EAF5FE;
+  --sf-text:      #002775;
+  --sf-weak:      #4A5578;
+  --client:       #002776;
+  --client-dark:  #001350;
+  --teal:         #06A59A;
+  --teal-95:      #DEF9F3;
+  --yellow-70:    #E4A201;
+  --yellow-95:    #FBF3E0;
+  --pink-40:      #B60554;
+  --pink-95:      #FEF0F3;
+  --shadow:       2.6px 9.7px 25px rgba(6,106,254,0.12);
+  --font-h:       'ITC Avant Garde Gothic Demi','Avant Garde','Century Gothic','Salesforce Sans','Source Sans 3',Arial,sans-serif;
+  --font-b:       'Salesforce Sans','Source Sans 3','Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#f4f6fa;font-family:var(--font-b);color:var(--sf-text);font-size:16px;line-height:1.65;}
+a{color:var(--sf-blue);text-decoration:none;}
+
+/* ── Layout ── */
+.page-wrap{max-width:960px;margin:0 auto;padding:0 24px 80px;}
+
+/* ── Cover ── */
+.cover{background:linear-gradient(135deg,var(--client-dark) 0%,var(--sf-navy) 50%,var(--sf-container) 100%);padding:72px 80px 64px;margin-bottom:0;position:relative;overflow:hidden;}
+.cover::after{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;border-radius:50%;background:rgba(0,179,255,.07);pointer-events:none;}
+.cover-label{font-family:var(--font-h);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sf-cloud);margin-bottom:20px;}
+.cover-title{font-family:var(--font-h);font-size:44px;line-height:1.15;color:#fff;margin-bottom:16px;}
+.cover-sub{font-size:18px;color:rgba(255,255,255,.7);max-width:560px;margin-bottom:36px;line-height:1.6;}
+.cover-meta{display:flex;gap:40px;border-top:1px solid rgba(255,255,255,.15);padding-top:24px;}
+.cover-meta-item{}
+.cover-meta-label{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.4);font-family:var(--font-h);margin-bottom:4px;}
+.cover-meta-val{font-size:15px;color:rgba(255,255,255,.85);}
+.cover-stripe{width:56px;height:3px;background:linear-gradient(90deg,var(--sf-cloud),var(--sf-blue));margin-bottom:24px;}
+
+/* ── Section ── */
+.section{background:#fff;border-radius:12px;box-shadow:var(--shadow);margin-top:28px;overflow:hidden;}
+.section-header{padding:32px 48px 0;position:relative;}
+.section-header::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--client),var(--sf-cloud));}
+.section-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--client);color:#fff;font-family:var(--font-h);font-size:12px;margin-bottom:12px;}
+.section-eyebrow{font-family:var(--font-h);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--sf-blue);margin-bottom:8px;}
+.section-title{font-family:var(--font-h);font-size:28px;line-height:1.2;color:var(--sf-navy);margin-bottom:0;}
+.section-body{padding:24px 48px 40px;}
+
+/* ── Typography ── */
+p{margin-bottom:16px;color:var(--sf-text);}
+p:last-child{margin-bottom:0;}
+h3{font-family:var(--font-h);font-size:18px;color:var(--sf-navy);margin:28px 0 12px;}
+h3:first-child{margin-top:0;}
+h4{font-family:var(--font-h);font-size:15px;color:var(--client);margin:20px 0 8px;text-transform:uppercase;letter-spacing:.08em;}
+strong{color:var(--sf-navy);}
+
+/* ── Lists ── */
+ul.prop{list-style:none;padding:0;margin:0 0 20px;}
+ul.prop li{padding:8px 0 8px 22px;position:relative;border-bottom:1px solid var(--sf-light-bg);color:var(--sf-text);}
+ul.prop li:last-child{border-bottom:none;}
+ul.prop li::before{content:'▸';position:absolute;left:0;color:var(--sf-blue);font-size:12px;top:10px;}
+
+/* ── Call-out boxes ── */
+.callout{border-radius:8px;padding:20px 24px;margin:20px 0;}
+.callout-warn{background:var(--yellow-95);border-left:3px solid var(--yellow-70);}
+.callout-warn p{color:#5a3e00;}
+.callout-info{background:var(--sf-light-bg);border-left:3px solid var(--sf-blue);}
+.callout-info p{color:var(--sf-text);}
+.callout-risk{background:var(--pink-95);border-left:3px solid var(--pink-40);}
+.callout-risk p{color:#5a0020;}
+.callout-ok{background:var(--teal-95);border-left:3px solid var(--teal);}
+.callout-ok p{color:#003d38;}
+
+/* ── Stat bar ── */
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--sf-bg);border-radius:8px;overflow:hidden;margin:24px 0;}
+.stat{background:#fff;padding:20px 16px;text-align:center;}
+.stat-val{font-family:var(--font-h);font-size:28px;color:var(--client);line-height:1;}
+.stat-lbl{font-size:12px;color:var(--sf-weak);margin-top:4px;text-transform:uppercase;letter-spacing:.08em;}
+
+/* ── Phase cards ── */
+.phases{display:flex;flex-direction:column;gap:16px;margin:20px 0;}
+.phase-card{border:1px solid var(--sf-bg);border-radius:8px;overflow:hidden;}
+.phase-head{display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--sf-light-bg);}
+.phase-tag{font-family:var(--font-h);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:var(--client);color:#fff;padding:4px 10px;border-radius:999px;white-space:nowrap;}
+.phase-name{font-family:var(--font-h);font-size:15px;color:var(--sf-navy);}
+.phase-dur{margin-left:auto;font-size:13px;color:var(--sf-weak);white-space:nowrap;}
+.phase-body{padding:14px 20px;font-size:14px;color:var(--sf-text);}
+.phase-logic{font-size:13px;color:var(--sf-weak);font-style:italic;margin-top:6px;}
+
+/* ── Epic table ── */
+.epic-section{margin:24px 0;}
+.epic-wave{font-family:var(--font-h);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--sf-blue);padding:8px 0 12px;border-bottom:2px solid var(--sf-bg);margin-bottom:16px;}
+.epic{border:1px solid var(--sf-bg);border-radius:8px;padding:18px 22px;margin-bottom:12px;}
+.epic::after{content:"Épico ordenado por dependência de entrega — não por ID sequencial.";display:block;font-size:10px;color:#aaa;font-style:italic;margin-top:12px;padding-top:8px;border-top:1px solid var(--sf-bg);}
+.epic-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;}
+.epic-id-badge{font-family:var(--font-h);font-size:11px;background:var(--client);color:#fff;padding:3px 10px;border-radius:999px;white-space:nowrap;margin-top:2px;}
+.epic-size{font-family:var(--font-h);font-size:11px;padding:3px 10px;border-radius:999px;white-space:nowrap;margin-top:2px;}
+.size-s{background:#DEF9F3;color:#06A59A;}
+.size-m{background:#FBF3E0;color:#E4A201;}
+.size-l{background:#FEF0F3;color:#B60554;}
+.epic-title{font-family:var(--font-h);font-size:16px;color:var(--sf-navy);}
+.epic-cond{font-size:11px;background:var(--yellow-95);color:var(--yellow-70);border-radius:999px;padding:3px 10px;font-family:var(--font-h);margin-top:2px;}
+.epic-deliverables{font-size:14px;color:var(--sf-text);}
+ul.edel{list-style:none;padding:0;margin:6px 0 0;}
+ul.edel li{padding:3px 0 3px 18px;position:relative;font-size:14px;color:var(--sf-text);}
+ul.edel li::before{content:'–';position:absolute;left:0;color:var(--sf-blue);}
+
+/* ── Milestones ── */
+.milestone-table{width:100%;border-collapse:collapse;font-size:14px;margin:16px 0;}
+.milestone-table th{background:var(--sf-container);color:#fff;padding:10px 14px;text-align:left;font-family:var(--font-h);font-size:12px;letter-spacing:.06em;}
+.milestone-table td{padding:10px 14px;border-bottom:1px solid var(--sf-light-bg);vertical-align:middle;}
+.milestone-table tr:nth-child(even) td{background:var(--sf-light-bg);}
+.ms-badge{display:inline-block;background:var(--client);color:#fff;font-family:var(--font-h);font-size:11px;padding:2px 8px;border-radius:999px;}
+
+/* ── Investment ── */
+.investment-box{background:linear-gradient(135deg,var(--client-dark),var(--sf-navy));border-radius:10px;padding:36px 40px;margin:20px 0;text-align:center;}
+.inv-label{font-family:var(--font-h);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--sf-cloud);margin-bottom:8px;}
+.inv-amount{font-family:var(--font-h);font-size:52px;color:#fff;line-height:1;}
+.inv-sub{font-size:15px;color:rgba(255,255,255,.6);margin-top:8px;}
+.payment-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:20px;}
+.payment-table th{background:var(--sf-light-bg);color:var(--sf-navy);padding:10px 14px;text-align:left;font-family:var(--font-h);font-size:12px;border-bottom:2px solid var(--sf-bg);}
+.payment-table td{padding:10px 14px;border-bottom:1px solid var(--sf-light-bg);vertical-align:top;}
+.payment-table tr:last-child td{border-bottom:none;font-weight:600;background:var(--sf-light-bg);}
+
+/* ── Why us ── */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;}
+.why-card{background:var(--sf-light-bg);border-radius:8px;padding:20px 22px;}
+.why-card-title{font-family:var(--font-h);font-size:14px;color:var(--client);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;}
+.why-card p{font-size:14px;color:var(--sf-text);margin:0;}
+
+/* ── Next steps ── */
+.next-card{background:linear-gradient(135deg,var(--client),var(--sf-container));border-radius:10px;padding:36px 40px;}
+.next-card p{color:#fff;font-size:17px;line-height:1.7;margin-bottom:16px;}
+.next-card p:last-child{margin-bottom:0;}
+.next-card strong{color:var(--sf-cloud);}
+
+/* ── Footer ── */
+.footer{margin-top:40px;padding:24px 0;border-top:1px solid var(--sf-bg);}
+.footer p{font-size:11px;color:var(--sf-weak);line-height:1.6;margin-bottom:6px;}
+
+/* ── Print ── */
+@media print{
+  body{background:#fff;}
+  .page-wrap{padding:0 16px 40px;max-width:100%;}
+  .section{box-shadow:none;border:1px solid #e0e0e0;page-break-inside:avoid;}
+  .cover{background:#001E5B !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+<!-- ══ COVER ══════════════════════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-label">Proposta Técnica e Comercial · Confidencial</div>
+  <div class="cover-stripe"></div>
+  <div class="cover-title">Transformação do Atendimento<br>ao Cliente no BTG Pactual</div>
+  <div class="cover-sub">Uma plataforma unificada de serviço para escalar sem perder controle — com a arquitetura certa para operar em um ambiente FSI regulado.</div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Cliente</div>
+      <div class="cover-meta-val">Banco BTG Pactual S.A.</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Preparado por</div>
+      <div class="cover-meta-val">Salesforce Professional Services LATAM</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Data</div>
+      <div class="cover-meta-val">Setembro 2026</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Modalidade</div>
+      <div class="cover-meta-val">Fixed Fee · 20 semanas</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 1 — O PROBLEMA ═══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-eyebrow">O Problema</div>
+    <h2 class="section-title">Nossa plataforma de atendimento foi construída para um momento que já passou.</h2>
+  </div>
+  <div class="section-body">
+    <p>O BTG Pactual opera uma das carteiras de clientes mais diversas e de maior valor do mercado financeiro brasileiro — wealth management, corporate banking, BTG+ e backoffice em uma única instituição. O desafio não é falta de escala. É que a infraestrutura de atendimento que suporta essa operação acumulou débito técnico, fragmentação e pontos cegos que comprometem tanto a experiência do cliente quanto a exposição regulatória.</p>
+
+    <h3>O que está acontecendo hoje</h3>
+    <ul class="prop">
+      <li><strong>40% dos casos são direcionados incorrectamente.</strong> Agentes recebem casos fora da sua especialidade, reencaminham, e o cliente espera. Cada erro de roteamento é retrabalho mensurável e atrito desnecessário com quem deveria estar sendo atendido.</li>
+      <li><strong>SLAs não são monitorados de forma sistemática.</strong> Não existe um mecanismo automatizado que mede o cumprimento de SLAs por segmento de cliente. O que não se mede não se gerencia — e em um ambiente regulado pelo BACEN, isso é uma exposição que cresce silenciosamente.</li>
+      <li><strong>Duas orgs Salesforce (Core e Bank Assist) sem visão unificada do cliente e ~25.700 transbordos por mês entre elas.</strong> ~22.525 casos/mês vão de Core→Bank Assist; ~3.192 voltam. Em cada transbordo, dados vitais se perdem — CPF, assessor, histórico de SLA, contexto do atendimento. O cliente recomeça. O agente recomeça. Nenhuma org enxerga o SLA ponta-a-ponta: "Tempo total: não medido" é o status atual documentado.</li>
+      <li><strong>630 campos customizados no objeto Case da org Core, confirmados em produção.</strong> Somados aos 303 da Bank Assist totalizam 933 — acima do hard cap da plataforma se as orgs forem unificadas. Além dos campos: 2.393 filas, 151 Record Types de Case, 144 Entitlement Processes e 73 Milestones só na Core. Esse débito cria risco em cada deployment, aumenta o tempo de treinamento e torna qualquer evolução da plataforma mais lenta do que deveria ser.</li>
+      <li><strong>O ITSM existente do BTG opera sem integração com o Service Cloud.</strong> Atendimento ao cliente e suporte interno funcionam em plataformas separadas — a Salesforce PS está considerando o ITSM atual do BTG em todo o design desta proposta, com a frente de integração sendo endereçada em proposta PS separada.</li>
+      <li><strong>Agentforce e Data Cloud estão licenciados mas bloqueados.</strong> O investimento em IA já foi feito. A arquitetura para colocá-la em produção — com conformidade BACEN, LGPD e Einstein Trust Layer configurado corretamente — ainda não existe.</li>
+    </ul>
+
+    <div class="callout callout-info">
+      <p><strong>PS Discovery concluído em 18/09/2026.</strong> 6 semanas · 17 entrevistas · ~25 participantes · ~24h de sessões · 5 artefatos entregues (Readout, Personas, Jornada Macro As Is, Documentos de Apoio, ADR-BTG-001). 135 dores mapeadas em 7 frentes operacionais; 27 personas identificadas (12 construídas com KPIs e JTBDs). Os dados acima não são estimativas de mercado — foram extraídos diretamente dos sistemas em produção e confirmados com o time BTG. Nossa recomendação arquitetural é Opção A/A+: integração assíncrona (Platform Events/CDC) entre as orgs Core e Bank Assist, com Data Cloud como camada de agregação opcional.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 2 — POR QUE ISSO IMPORTA ════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-eyebrow">Por Que Isso Importa</div>
+    <h2 class="section-title">O custo de não resolver isso é maior do que o custo de resolver.</h2>
+  </div>
+  <div class="section-body">
+    <p>Cada um dos problemas acima tem um custo operacional direto. Mas o custo estratégico da inação é o que realmente importa para esta decisão.</p>
+
+    <h3>Custo operacional imediato</h3>
+    <ul class="prop">
+      <li><strong>Erros de roteamento a 40%</strong> significam que quase metade dos casos passa por pelo menos um transfer desnecessário antes de chegar ao agente certo. Em uma carteira com volumes relevantes de chamados, isso é horas de trabalho operacional desperdiçado por dia — e tempo do cliente que deveria estar sendo aplicado em relacionamento.</li>
+      <li><strong>Sem SLA enforcement automatizado,</strong> o BTG depende de supervisores humanos para identificar violações. Isso não escala. E em um eventual processo de supervisão do BACEN, a incapacidade de demonstrar monitoramento sistemático é um risco que vai além do operacional.</li>
+      <li><strong>Com o ITSM existente do BTG sem integração ao Service Cloud,</strong> o suporte interno opera em silos que não conversam com o atendimento ao cliente — gerando ineficiência em escalonamentos que envolvem ambos os domínios.</li>
+    </ul>
+
+    <h3>Por que agora, especificamente</h3>
+    <ul class="prop">
+      <li><strong>O Readout de Discovery foi entregue em 18/09/2026 com recomendação arquitetural formal.</strong> A PS recomenda Opção A/A+: integração assíncrona entre Core e Bank Assist via Platform Events/CDC, mantendo as orgs separadas com uma camada de integração robusta. A decisão formal do BTG era esperada após o Readout. Cada semana sem formalização comprime a janela de execução e empurra o go-live para além de janeiro de 2027.</li>
+      <li><strong>O investimento em licenças de Data Cloud e Agentforce já foi feito.</strong> O ROI dessas licenças começa a contar a partir da assinatura. Cada mês sem arquitetura de produção é retorno não realizado sobre um investimento que já está no balanço.</li>
+      <li><strong>O mercado não está esperando.</strong> Concorrentes diretos — bancos incumbentes e fintechs — já operam com roteamento inteligente e automação de atendimento baseada em IA. A janela para implementar isso antes que se torne standard na indústria está fechando.</li>
+    </ul>
+
+    <div class="callout callout-warn">
+      <p><strong>A pergunta não é se o BTG vai fazer essa transformação.</strong> A pergunta é se vai fazer agora, com a arquitetura certa e o parceiro que já conhece o ambiente — ou mais tarde, com mais risco e mais custo.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 3 — NOSSA ABORDAGEM AGILE ═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-eyebrow">Nossa Abordagem</div>
+    <h2 class="section-title">Quatro fases com lógica clara. Nenhum sprint começa sem que o anterior tenha validado o que vem a seguir.</h2>
+  </div>
+  <div class="section-body">
+    <p>Nossa metodologia Agile para este engajamento não é um processo genérico. Ela foi desenhada para a realidade de um ambiente brownfield em uma instituição financeira regulada — onde descobertas técnicas e decisões de compliance precisam ser resolvidas antes de construir, não durante.</p>
+
+    <div class="phases">
+      <div class="phase-card">
+        <div class="phase-head">
+          <div class="phase-tag">Fase 1</div>
+          <div class="phase-name">Solution Design &amp; Finalização de ADRs</div>
+          <div class="phase-dur">W1–W4 · 4 semanas</div>
+        </div>
+        <div class="phase-body">
+          Convertemos o PS Discovery em design executável: ratificamos a Opção A/A+ como direção de arquitetura, fechamos os 5 ADRs originais (org isolation, ITSM scope, CTI vendor, Core Banking API auth, Hyperforce BR) e resolvemos ADR-06 (Data Cloud configuration — licenciamento já confirmado em produção) e ADR-07 (Agentforce AI Tool Permission com BTG IT Security). Finalizamos o design de E05 — o coração da Opção A/A+: camada de integração assíncrona Platform Events/CDC entre Core e Bank Assist — e inicializamos Wave 1 e Wave 2 com backlogs validados. <strong>Nenhum trabalho de build começa antes dos ADRs críticos serem ratificados pelo BTG.</strong> As trilhas condicionais E09 e E10 entram em paralelo se ADR-06 e ADR-07 forem resolvidos nesta fase.
+          <div class="phase-logic">Por que primeiro: qualquer ambiguidade arquitetural não resolvida aqui vira retrabalho caro na Wave 1. A ratificação dos ADRs e o design técnico em 4 semanas é a transição de descoberta para execução — o que separa um projeto que entrega de um que revisa.</div>
+        </div>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-head">
+          <div class="phase-tag">Fase 2</div>
+          <div class="phase-name">Wave 1 — Service Cloud Build</div>
+          <div class="phase-dur">W5–W15 · 11 semanas (paralela com Fase 3)</div>
+        </div>
+        <div class="phase-body">
+          Construímos e entregamos a plataforma Service Cloud unificada: E02 (data model, SLAs, remediação de débito técnico), E03 (Knowledge/KCS), E04 (Omni-Channel, CTI, skills-based routing). A trilha E09 (Data Cloud) corre em paralelo como faixa independente com o Data Cloud Architect dedicado.
+          <div class="phase-logic">Por que 11 semanas: as três frentes são interdependentes na sequência mas independentes na execução. O data model de E02 precede as filas de E04; E03 precede a triagem inteligente de E10. Paralelismo controlado é o que mantém o critical path em 20 semanas.</div>
+        </div>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-head">
+          <div class="phase-tag">Fase 3</div>
+          <div class="phase-name">Wave 2 — Platform &amp; Integration Build</div>
+          <div class="phase-dur">W5–W15 · 11 semanas (paralela com Fase 2)</div>
+        </div>
+        <div class="phase-body">
+          Construímos e entregamos E05 (Core Banking API, painel financeiro BACEN-compliant). A trilha E10 (Agentforce/SOMA) inicia após E03+E04 atingirem UAT (~W12) para garantir que a base de knowledge e roteamento estejam validadas antes da automação de IA. A integração com o ITSM existente do BTG (E06) é endereçada em proposta PS separada, em desenvolvimento em paralelo.
+          <div class="phase-logic">Por que paralela com Fase 2: separar as trilhas de service e platform permite que E05 — com sua dependência crítica da API spec do Core Banking — tenha seu próprio ritmo sem bloquear o Service Cloud.</div>
+        </div>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-head">
+          <div class="phase-tag">Fase 4</div>
+          <div class="phase-name">UAT, Deploy &amp; Adoção</div>
+          <div class="phase-dur">W16–W20 · 5 semanas</div>
+        </div>
+        <div class="phase-body">
+          UAT cross-workstream (W16–W17), Go/No-Go (W18), go-live em produção e hypercare de duas semanas (W19–W20). Consolidamos E07 (relatórios operacionais), E08 (change management, train-the-trainer) e as finalizações de E09 e E10 em produção.
+          <div class="phase-logic">Por que cinco semanas: hypercare não é opcional em um ambiente FSI. Dois sprints de suporte pós-go-live é o que separa uma entrega de uma entrega bem-sucedida.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-bar">
+      <div class="stat"><div class="stat-val">20</div><div class="stat-lbl">Semanas</div></div>
+      <div class="stat"><div class="stat-val">4</div><div class="stat-lbl">Fases</div></div>
+      <div class="stat"><div class="stat-val">17</div><div class="stat-lbl">Épicos</div></div>
+      <div class="stat"><div class="stat-val">9</div><div class="stat-lbl">Papéis</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 4 — O QUE VOCÊS RECEBERÃO ═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-eyebrow">Entregáveis</div>
+    <h2 class="section-title">O que vocês receberão — técnica e estrategicamente, por épico.</h2>
+  </div>
+  <div class="section-body">
+    <p>17 épicos estruturados no PS Discovery de 18/09/2026, organizados em torno dos problemas operacionais do BTG — não por produto Salesforce. Cada épico endereça dores confirmadas em 22 sessões com 135 pontos mapeados e 27 personas. Entregáveis são código, configuração, documentação e capacitação que o BTG vai operar após o go-live.</p>
+
+    <!-- ONDA 0 -->
+    <div class="epic-section">
+      <div class="epic-wave">Onda 0 — Prepare</div>
+
+      <div class="epic">
+        <div class="epic-header">
+          <span class="epic-id-badge">E01</span>
+          <span class="epic-size size-l">L</span>
+          <span class="epic-title">Limites de Governança da Plataforma</span>
+        </div>
+        <ul class="edel">
+          <li>Auditoria e consolidação das 2.393 filas ativas da org Core — remediação bounded a um cap definido no Solution Design; redução para estrutura enxuta por segmento de serviço</li>
+          <li>Unificação dos 144 Entitlement Processes (78,4% não-padrão) em modelo reduzido com exceções governadas por segmento</li>
+          <li>Remoção de Apex workarounds que competem com o limite de Code Size já em 82% na org Core — libera headroom para E02 e para a frente de integração ITSM (E06, proposta separada)</li>
+          <li>Definição e publicação de políticas de configuração: cap de campos por objeto, critérios de criação de fila, padrão de automação (Flow-first)</li>
+          <li>Resolução dos ADRs pendentes antes de Onda 1: modelo de compartilhamento Chinese Wall (E16/ADR-02), PE namespace (E02/ADR-03), Data Cloud licensing (E03/ADR-04)</li>
+          <li>Entregável: Solution Design Document + backlogs de sprint inicializados para todas as ondas</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ONDA 1 -->
+    <div class="epic-section">
+      <div class="epic-wave">Onda 1 — Arch A (Caminho Crítico)</div>
+
+      <div class="epic" style="border:2px solid var(--client);">
+        <div class="epic-header">
+          <span class="epic-id-badge">E02</span>
+          <span class="epic-size size-l" style="background:#fce8ff;color:#8b00b3;font-size:11px;padding:3px 10px;border-radius:999px;">XL</span>
+          <span class="epic-title">Integração Core↔BankAssist (Opção A)</span>
+          <span class="epic-cond" style="background:#fff3e0;color:#c65000;">XL · Backbone · Caminho Crítico</span>
+        </div>
+        <ul class="edel">
+          <li><strong>CDC nas duas orgs + Platform Events bidirecionais:</strong> substituição da API/REST síncrona com latência média de 20,4s (72,8% das chamadas acima de 5s) — ~25.717 transbordos/mês com continuidade garantida</li>
+          <li>Namespace isolation, schemas de evento, CDC configuration (Account, Case, Contact) — design assimétrico: Core ~540K cases/mês vs. Bank Assist ~637K/mês</li>
+          <li>Error handling: retry automático, dead-letter queue, fallback de degradação graciosa — auditável por SOX</li>
+          <li>Observabilidade end-to-end: LWC de monitoramento de eventos para Supervisores; Error_Log__c com rastreabilidade completa de falhas e transbordos</li>
+          <li>Descomissionamento dos mecanismos paliativos manuais hoje mantidos pelos times</li>
+          <li>Gate ADR-03: BTG Engenharia confirma event-driven pattern, namespace e endpoint não-produção antes de início da Onda 1</li>
+          <li>Pré-requisito técnico para E03 (SLA via Data Cloud), E09 (identity resolution) e E15 (integração sistemas externos)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ONDA 2 -->
+    <div class="epic-section">
+      <div class="epic-wave">Onda 2 — Arch A+ (Paralela após E02)</div>
+
+      <div class="epic">
+        <div class="epic-header">
+          <span class="epic-id-badge">E03</span>
+          <span class="epic-size size-l">L</span>
+          <span class="epic-title">SLA Estratégico via Data Cloud (Opção A+)</span>
+        </div>
+        <ul class="edel">
+          <li>Salesforce Connectors nativos das duas orgs → Data Cloud — aproveitando licenciamento já ativo (Core: 89 usuários; Bank Assist: Remote Data Cloud User)</li>
+          <li>Data Model Objects (DMOs) e Data Lake Objects (DLOs): dados financeiros NUNCA replicados no Data Cloud — somente dados operacionais de atendimento</li>
+          <li>Identity resolution cross-org por CPF e e-mail: unified profile do cliente consolidando histórico de casos das duas orgs</li>
+          <li>Unified case view: agente vê interações completas do cliente independente de qual org originou o caso</li>
+          <li>Calculated Insights de SLA end-to-end: primeira vez que o BTG terá visibilidade do ciclo completo de atendimento ao cliente</li>
+          <li>Conduzido por Data Cloud Architect dedicado (half-time) — faixa paralela independente ao restante da Onda 2</li>
+          <li>Gate ADR-04: Data Cloud licensing confirmado com Coco antes de início da Onda 2</li>
+        </ul>
+      </div>
+
+      <div class="epic">
+        <div class="epic-header">
+          <span class="epic-id-badge">E08</span>
+          <span class="epic-size size-l">L</span>
+          <span class="epic-title">Verificação de Identidade e Compliance de Assessores e Parceiros</span>
+        </div>
+        <ul class="edel">
+          <li>Sinalização em tela do vínculo assessor↔conta no console do agente: substitui validação hoje 100% manual via plataforma externa DPG — cobre 19 dores mapeadas na frente Assessores</li>
+          <li>Identity resolution cross-org via Data Cloud (E03): confirmação sistêmica do vínculo nas orgs Core e Bank Assist</li>
+          <li>Controles de compliance para atendimentos envolvendo assessores credenciados — impacto direto em LGPD e sigilo bancário</li>
+          <li>Gate: API spec do sistema DPG e modelo de dados de vínculo assessor↔conta a confirmar com BTG Compliance em Onda 0</li>
+        </ul>
+      </div>
+
+      <div class="epic">
+        <div class="epic-header">
+          <span class="epic-id-badge">E09</span>
+          <span class="epic-size size-l">L</span>
+          <span class="epic-title">Duplicidade e Identidade entre Caso e Conta</span>
+        </div>
+        <ul class="edel">
+          <li>Identity resolution cross-org: unificação da visão de cliente nas duas orgs via Data Cloud, algoritmo de matching por CPF e canal</li>
+          <li>Detecção de duplicidade: casos com 4–6 tickets abertos para o mesmo problema raiz identificados e vinculados automaticamente</li>
+          <li>Surface unificada de casos no console do agente: todos os tickets do mesmo cliente visíveis independentemente da org de origem</li>
+          <li>Previne cobrança indevida e restaura confiança nas métricas de volume de casos</li>
+          <li>Gate ADR-05: Agentforce licensing + AI Tool Permission validado com BTG IT Security antes de qualquer inferência em produção</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ONDA 3 -->
+    <div class="epic-section">
+      <div class="epic-wave">Onda 3 — Trilha B (Paralela após Onda 1)</div>
+
+      <div class="epic">
+        <div class="epic-header">
+          <span class="epic-id-badge">E04</span>
+          <span class="epic-size size-m">M</span>
+          <span class="epic-title">Padronização de Tabulação, Vocabulário e Metadados</span>
+        </div>
+        <ul class="edel">
+          <li>Auditoria dos campos de tabulação em uso nas duas orgs: mapeamento de divergências entre frentes e definição do vocabulário operacional unificado</li>
+          <li>Padronização de picklists de tabulação por segmento (CX, Middle, Onboarding, IT, Assessores) — harmonizadas entre Core e Bank Assist</li>
+          <li>Metadados de Case alinhados entre as duas orgs: campos obrigatórios, valores válidos, regras de validação consistentes</li>
+          <li>Fundação de dados para E10 (rastreabilidade), E11 (transbordo sistêmico) e E07 (dashboards de capacidade)</li>
+        </ul>
+      </div>
+
+      <div class="epic">
+        <div class="epic-header">
+          <span class="epic-id-badge">E05</span>
+          <span class="epic-size size-m">M</span>
+          <span class="epic-title">Fechamento, Reabertura e Continuidade de Status do Caso</span>
+        </div>
+        <ul class="edel">
+          <li>Critérios de fechamento por segmento: regras governadas impedindo fechamento prematuro ou anti-gaming de SLA</li>
+          <li>Controle de reabertura com rastreabilidade de motivo: cada reabertura registra quem, quando e por quê — auditável por SOX</li>
+          <li>Propagação de histórico no transbordo: agente receptor vê contexto completo sem exigir que o cliente relate do zero</li>
+          <li>Dependências: E06 (integração com ITSM existente do BTG — proposta PS separada) e E16 (modelo de compartilhamento definido)</li>
+        </ul>
+      </div>
+
+      <div class="epic" style="border:1px dashed var(--sf-weak);opacity:0.85;">
+        <div class="epic-header">
+          <span class="epic-id-badge">E06</span>
+          <span class="epic-size size-l">L</span>
+          <span class="epic-title">Integração com ITSM Existente do BTG</span>
+          <span class="epic-cond" style="background:#e8f4ff;color:#0070d2;">Proposta PS separada — em fase de RFP</span>
+        </div>
+        <ul class="edel">
+          <li>A Salesforce PS está considerando o ITSM existente do BTG em todo o design desta proposta — a frente de integração entre o ITSM atual e o Service Cloud é endereçada em proposta PS separada, atualmente em fase de RFP</li>
+          <li>E05 (fechamento/reabertura) e E07 (capacidade) permanecem no Fixed Fee com dependência arquitetural de E06 — alinhamento de interface será realizado no Solution Design (M1)</li>
+        </ul>
+      </div>
+
+      <div class="epic">
+        <div class="epic-header">
+          <span class="epic-id-badge">E07</span>
+          <span class="epic-size size-m">M</span>
+          <span class="epic-title">Visibilidade de Capacidade e Força de Trabalho</span>
+        </div>
+        <ul class="edel">
+          <li>Dashboards operacionais com Omni Supervisor: filas em tempo real, disponibilidade de agentes, carga por frente e segmento</li>
+          <li>Relatórios de performance por agente e área: volume, tempo médio de resolução, FCR e SLA por tier</li>
+          <li>Métricas de capacidade que permitem gestão proativa da força de trabalho sem dependência de ferramentas externas</li>
+          <li>Dependências: E04 (vocabulário unificado), E06 (integração com ITSM existente do BTG — proposta PS separada), E16 (modelo de compartilhamento)</li>
+        </ul>
+      </div>
+
+      <div class="epic">
+        <div class="epic-header">
+          <span class="epic-id-badge">E10</span>
+          <span class="epic-size size-m">M</span>
+          <span class="epic-title">Rastreabilidade E2E Cross-Canal</span>
+        </div>
+        <ul class="edel">
+          <li>Timeline de caso com todos os eventos cross-canal e cross-org: telefone, e-mail, chat, atendimento presencial — visível no console do agente</li>
+          <li>Logs de transbordo rastreáveis: quem recebeu, quando, de qual frente, qual o status no momento do transbordo</li>
+          <li>Relatórios de jornada: identificação de onde o atendimento falha e quanto tempo o cliente espera em cada etapa</li>
+          <li>Dependência: E04 (metadados de canal de origem padronizados)</li>
+        </ul>
+      </div>
+
+      <div class="epic">
+        <div class="epic-header">
+          <span class="epic-id-badge">E11</span>
+          <span class="epic-size size-l">L</span>
+          <span class="epic-title">Governança de Transbordo e Priorização entre Camadas</span>
+        </div>
+        <ul class="edel">
+          <li>Substituição das 200+ filas manuais e "depara" tribal por Omni-Channel Flows sistêmicos por segmento e camada (N1→N2→N3, B2C via Bank Assist, IT→Core)</li>
+          <li>Confirmação sistêmica via Platform Events (E02) de que o caso abriu no destino — elimina ambiguidade que gera retrabalho e duplicidade</li>
+          <li>Propagação do farol de priorização do cliente para N2/N3 e assessores em todos os transbordos</li>
+          <li>Cobertura das 6 frentes de transbordo identificadas no discovery: N2 Middle, N3 Onboarding, CX, IT Banking, IT Empresas, Assessores</li>
+          <li>Dependência: E04 (vocabulário unificado para roteamento sistêmico)</li>
+        </ul>
+      </div>
+
+      <div class="epic">
+        <div class="epic-header">
+          <span class="epic-id-badge">E12</span>
+          <span class="epic-size size-m">M</span>
+          <span class="epic-title">Consolidação de Canais de Entrada de Caso</span>
+        </div>
+        <ul class="edel">
+          <li>Service Channels padronizados para todos os canais ativos: telefone, e-mail, portal, atendimento presencial — roteamento Omni-Channel por canal e segmento</li>
+          <li>Metadata de canal de origem em todos os cases: viabiliza análises de volume por canal e identificação de canais de alta carga</li>
+          <li>Roteamento unificado por segmento e canal — elimina cases criados de forma independente sem rastreabilidade</li>
+        </ul>
+      </div>
+
+      <div class="epic" style="border:2px solid var(--yellow-70);">
+        <div class="epic-header">
+          <span class="epic-id-badge">E16</span>
+          <span class="epic-size size-l" style="background:#fce8ff;color:#8b00b3;font-size:11px;padding:3px 10px;border-radius:999px;">XL</span>
+          <span class="epic-title">Chinese Wall / Modelo de Compartilhamento</span>
+          <span class="epic-cond">XL · Gate: Decisão de Modelo Obrigatória antes de Onda 3</span>
+        </div>
+        <div class="callout callout-warn" style="margin-bottom:12px;"><p><strong>Gate ADR-02:</strong> Decisão de modelo de compartilhamento OWD obrigatória antes de iniciar este épico. Nomear patrocinador único BTG com autoridade de decisão antes de Onda 3. Sem decisão bloqueia E05 e E07.</p></div>
+        <ul class="edel">
+          <li>OWD Private + Permission Set Groups por segmento + Sharing Rules governadas por carteira de cliente</li>
+          <li>Isolamento de acesso: agentes de cada frente veem somente os clientes e casos da sua própria carteira — Chinese Wall operacional</li>
+          <li>Role Hierarchy alinhada às células de serviço: 3 níveis por linha de serviço (Supervisor → Team Lead → Agent)</li>
+          <li>Redesenho requer patrocinador único BTG com autoridade de decisão — o maior risco individual da Onda 3</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CONVERGÊNCIA -->
+    <div class="epic-section">
+      <div class="epic-wave">Convergência — Gate Estratégico BTG Obrigatório</div>
+
+      <div class="callout callout-warn" style="margin-bottom:16px;">
+        <p>Os épicos abaixo dependem de gate estratégico BTG antes de qualquer sprint. Nenhum build inicia sem decisão formal do owner identificado.</p>
+      </div>
+
+      <div class="epic" style="border:1px dashed var(--sf-weak);">
+        <div class="epic-header">
+          <span class="epic-id-badge">E13</span>
+          <span class="epic-size size-l">L</span>
+          <span class="epic-title">Autoatendimento e Canais de Atendimento Externo</span>
+          <span class="epic-cond">Convergência · Gate: BTG Digital/CX</span>
+        </div>
+        <p style="font-size:13px;color:var(--sf-weak);margin:0 0 8px;">Requer decisão formal de ownership e estratégia de plataforma pelo BTG Digital/CX antes de qualquer build.</p>
+        <ul class="edel">
+          <li>Experience Cloud para autoatendimento externo: portal para clientes e assessores, processos de espólio, inventário e transferência de custódia — hoje 100% manuais</li>
+          <li>Chat com IA para assessores: migração de e-mail para canal estruturado com triagem inteligente</li>
+          <li>Portal Experience Cloud para instituições externas — ampliação do escopo de atendimento digital</li>
+        </ul>
+      </div>
+
+      <div class="epic" style="border:1px dashed var(--sf-weak);">
+        <div class="epic-header">
+          <span class="epic-id-badge">E14</span>
+          <span class="epic-size size-m">M</span>
+          <span class="epic-title">Gestão de Incidentes e Problemas Técnicos</span>
+          <span class="epic-cond">Convergência · Gate: BTG IT Banking</span>
+        </div>
+        <p style="font-size:13px;color:var(--sf-weak);margin:0 0 8px;">Requer decisão formal do BTG IT sobre escopo e ownership antes de qualquer build.</p>
+        <ul class="edel">
+          <li>Integração com ITSM existente do BTG: Incident Management e Service Request Management com SLA P1–P4 (30min→1h · 2h→4h · 4h→8h · 8h→24h), considerando o sistema ITSM atual em toda a arquitetura de integração</li>
+          <li>IT registra problema técnico uma vez, vincula automaticamente todos os casos de clientes impactados e age em massa</li>
+          <li>Aviso proativo de problema conhecido às frentes de atendimento — substitui saída do Jira hoje sem substituto</li>
+          <li>Extensão do modelo de causa-raiz estruturado para os demais times de TI</li>
+        </ul>
+      </div>
+
+      <div class="epic" style="border:1px dashed var(--sf-weak);">
+        <div class="epic-header">
+          <span class="epic-id-badge">E15</span>
+          <span class="epic-size size-l">L</span>
+          <span class="epic-title">Governança de Integração com Sistemas Externos</span>
+          <span class="epic-cond">Convergência · dep E02</span>
+        </div>
+        <p style="font-size:13px;color:var(--sf-weak);margin:0 0 8px;">Depende da camada assíncrona E02 como fundação. API specs de sistemas Pan e portal de estorno a confirmar com BTG Engenharia em Onda 0.</p>
+        <ul class="edel">
+          <li>Cadastro Pan PF (~15 contas/dia): integração entre sistemas de cadastro Pan e BTG — hoje 100% manual, sem integração nativa</li>
+          <li>Fluxo de estorno: eliminação da dupla entrada manual via write-back na API de estorno (hoje somente leitura via iframe)</li>
+          <li>Named Credentials + Apex callouts para sistemas prioritários — zero persistência de dados externos no Salesforce</li>
+          <li>Gate: API spec dos sistemas Pan e portal de estorno a confirmar com BTG Engenharia em Onda 0</li>
+        </ul>
+      </div>
+
+      <div class="epic" style="border:1px dashed var(--sf-weak);">
+        <div class="epic-header">
+          <span class="epic-id-badge">E17</span>
+          <span class="epic-size size-m">M</span>
+          <span class="epic-title">Tratamento Regulatório e de Compliance de Casos</span>
+          <span class="epic-cond">Convergência · Gate: BTG Compliance</span>
+        </div>
+        <p style="font-size:13px;color:var(--sf-weak);margin:0 0 8px;">Requer definição formal do critério de classificação regulatória pelo BTG Compliance antes do design.</p>
+        <ul class="edel">
+          <li>Sinalização e priorização diferenciada para casos de Ouvidoria — workflow de prazos regulatórios independente do SLA operacional</li>
+          <li>Rastreabilidade de cumprimento regulatório: multas por prazo vencido prevenidas por alertas automáticos antes do vencimento</li>
+          <li>Critério de classificação Ouvidoria vs. reclamação interna a ser definido formalmente com BTG Compliance</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 5 — CRONOGRAMA E MILESTONES ═════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-eyebrow">Cronograma e Milestones</div>
+    <h2 class="section-title">20 semanas. Cinco marcos contratuais. Sem surpresas.</h2>
+  </div>
+  <div class="section-body">
+    <p>O cronograma abaixo é o caminho crítico confirmado. Cada marco de pagamento está vinculado a um entregável específico e verificável — o BTG paga pelo que a PS entregou em ambiente sandbox, não pelo tempo que passou. O UAT é conduzido pelo BTG na Fase 4, após todos os épicos de Onda 2+3 estarem em sandbox.</p>
+
+    <table class="milestone-table">
+      <thead>
+        <tr>
+          <th style="width:10%;">Marco</th>
+          <th style="width:15%;">Semana</th>
+          <th style="width:35%;">Evento / Entregável</th>
+          <th style="width:25%;">Gate de Aceitação</th>
+          <th style="width:15%;">Pagamento</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="ms-badge">M0</span></td>
+          <td>W1 — Kickoff</td>
+          <td>Assinatura do SOW + kickoff oficial com equipes BTG e PS</td>
+          <td>Contrato assinado pelas duas partes</td>
+          <td><strong>20%</strong></td>
+        </tr>
+        <tr>
+          <td><span class="ms-badge">M1</span></td>
+          <td>W2 — Kickoff &amp; Solution Design</td>
+          <td>Solution Design finalizado: ADR-03 (PE/CDC namespace) e ADRs críticos ratificados, backlog de Onda 1 (E02 XL) inicializado, ambientes DEV provisionados, ADR-04 (Data Cloud) confirmado ou escalado</td>
+          <td>Sign-off de ADRs pelo BTG IT + BTG Compliance + aprovação do Backlog E02</td>
+          <td><strong>20%</strong></td>
+        </tr>
+        <tr>
+          <td><span class="ms-badge">M2</span></td>
+          <td>W8 — Onda 1 Build Completo</td>
+          <td>E02 (Integração Core↔BankAssist, Platform Events/CDC backbone) entregue em sandbox: namespace isolation ativo, CDC configurado (Account, Case, Contact), error handling funcional, LWC de monitoramento em sandbox; deploy de E02 em produção é gate para Onda 2 e Onda 3</td>
+          <td>Aceite formal de entrega pela PS (build completo); E02 em produção antes do início de Onda 2+3</td>
+          <td><strong>25%</strong></td>
+        </tr>
+        <tr>
+          <td><span class="ms-badge">M3</span></td>
+          <td>W16 — Onda 2+3 Builds Completos</td>
+          <td>E03 (SLA Data Cloud), E08 (Identidade Assessores), E09 (Deduplicação) e E04, E05, E07, E10–E12 entregues em sandbox UAT; Convergência (E13–E17) não incluída nesta proposta</td>
+          <td>Aceite formal de entrega pela PS (build completo); UAT conduzido pelo BTG na Fase 4</td>
+          <td><strong>25%</strong></td>
+        </tr>
+        <tr>
+          <td><span class="ms-badge">M4</span></td>
+          <td>W20 — Go-Live + Hypercare</td>
+          <td>Go-live em produção executado; 2 semanas de hypercare concluídas sem P1 em aberto; handoff para equipe interna BTG</td>
+          <td>Go/No-Go passado + zero P1 ao final de W20 + aceite de hypercare</td>
+          <td><strong>10%</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:24px;">
+      <h3 style="font-family:var(--font-h);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--sf-navy);margin-bottom:14px;">Cronograma Visual — 20 Semanas</h3>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:11px;min-width:640px;">
+          <thead>
+            <tr>
+              <th style="text-align:left;padding:6px 10px;font-family:var(--font-h);width:18%;border-bottom:2px solid #e0e5ee;color:#444;font-size:10px;">Fase</th>
+              <th colspan="2" style="text-align:center;padding:4px;font-family:var(--font-h);font-size:9px;color:#888;border-bottom:2px solid #e0e5ee;letter-spacing:.05em;">W1–W2</th>
+              <th colspan="6" style="text-align:center;padding:4px;font-family:var(--font-h);font-size:9px;color:#888;border-bottom:2px solid #e0e5ee;letter-spacing:.05em;">W3–W8</th>
+              <th colspan="8" style="text-align:center;padding:4px;font-family:var(--font-h);font-size:9px;color:#888;border-bottom:2px solid #e0e5ee;letter-spacing:.05em;">W9–W16</th>
+              <th colspan="4" style="text-align:center;padding:4px;font-family:var(--font-h);font-size:9px;color:#888;border-bottom:2px solid #e0e5ee;letter-spacing:.05em;">W17–W20</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:6px 10px;font-family:var(--font-h);font-size:11px;font-weight:600;color:#032d60;border-bottom:1px solid #f0f2f6;">P1 · Solution Design</td>
+              <td colspan="2" style="background:#0070d2;border-radius:4px 0 0 4px;height:20px;border-bottom:1px solid #f0f2f6;"></td>
+              <td colspan="6" style="background:#f0f2f6;border-bottom:1px solid #f0f2f6;"></td>
+              <td colspan="8" style="background:#f0f2f6;border-bottom:1px solid #f0f2f6;"></td>
+              <td colspan="4" style="background:#f0f2f6;border-radius:0 4px 4px 0;border-bottom:1px solid #f0f2f6;"></td>
+            </tr>
+            <tr>
+              <td style="padding:6px 10px;font-family:var(--font-h);font-size:11px;font-weight:600;color:#032d60;border-bottom:1px solid #f0f2f6;">P2 · Onda 1 (E02)</td>
+              <td colspan="2" style="background:#f0f2f6;border-bottom:1px solid #f0f2f6;"></td>
+              <td colspan="6" style="background:#1589ee;border-radius:4px;height:20px;border-bottom:1px solid #f0f2f6;"></td>
+              <td colspan="8" style="background:#f0f2f6;border-bottom:1px solid #f0f2f6;"></td>
+              <td colspan="4" style="background:#f0f2f6;border-bottom:1px solid #f0f2f6;"></td>
+            </tr>
+            <tr>
+              <td style="padding:6px 10px;font-family:var(--font-h);font-size:11px;font-weight:600;color:#032d60;border-bottom:1px solid #f0f2f6;">P3 · Onda 2+3 paralelas</td>
+              <td colspan="2" style="background:#f0f2f6;border-bottom:1px solid #f0f2f6;"></td>
+              <td colspan="6" style="background:#f0f2f6;border-bottom:1px solid #f0f2f6;"></td>
+              <td colspan="8" style="background:#5b7fcc;border-radius:4px;height:20px;border-bottom:1px solid #f0f2f6;"></td>
+              <td colspan="4" style="background:#f0f2f6;border-bottom:1px solid #f0f2f6;"></td>
+            </tr>
+            <tr>
+              <td style="padding:6px 10px;font-family:var(--font-h);font-size:11px;font-weight:600;color:#032d60;">P4 · UAT, Deploy &amp; Adoção</td>
+              <td colspan="2" style="background:#f0f2f6;"></td>
+              <td colspan="6" style="background:#f0f2f6;"></td>
+              <td colspan="8" style="background:#f0f2f6;"></td>
+              <td colspan="4" style="background:#04844b;border-radius:4px;height:20px;"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
+        <span style="font-size:10px;color:#666;"><span style="display:inline-block;width:12px;height:12px;background:#0070d2;border-radius:2px;margin-right:4px;vertical-align:middle;"></span>Solution Design (2w)</span>
+        <span style="font-size:10px;color:#666;"><span style="display:inline-block;width:12px;height:12px;background:#1589ee;border-radius:2px;margin-right:4px;vertical-align:middle;"></span>Onda 1 — E02 Backbone (6w)</span>
+        <span style="font-size:10px;color:#666;"><span style="display:inline-block;width:12px;height:12px;background:#5b7fcc;border-radius:2px;margin-right:4px;vertical-align:middle;"></span>Onda 2+3 paralelas (8w)</span>
+        <span style="font-size:10px;color:#666;"><span style="display:inline-block;width:12px;height:12px;background:#04844b;border-radius:2px;margin-right:4px;vertical-align:middle;"></span>UAT, Deploy &amp; Adoção (4w)</span>
+      </div>
+    </div>
+
+    <div class="callout callout-info" style="margin-top:20px;">
+      <p><strong>E01, E06 e E16 fora do Fixed Fee:</strong> E01 (Limites de Governança da Plataforma) é coberto pelo PS Discovery já engajado. E06 (Integração com ITSM existente do BTG) é endereçado pela Salesforce PS em proposta separada, atualmente em fase de RFP. E16 (Chinese Wall / Modelo de Compartilhamento, XL) requer decisão de modelo de compartilhamento OWD e será endereçado em etapa subsequente. Convergência (E13–E17) requer gate estratégico BTG antes de qualquer sprint e não está incluída nesta proposta.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 6 — INVESTIMENTO ════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-eyebrow">Investimento</div>
+    <h2 class="section-title">Fixed Fee. Sem surpresas de escopo. Sem variação de custo pelo que não controlamos.</h2>
+  </div>
+  <div class="section-body">
+    <div class="investment-box">
+      <div class="inv-label">Valor Total da Proposta</div>
+      <div class="inv-amount">R$ 5.666.648</div>
+      <div class="inv-sub">20 semanas · 9 papéis</div>
+    </div>
+
+    <h3>Estrutura de Pagamento — 5 Marcos</h3>
+    <table class="payment-table">
+      <thead>
+        <tr>
+          <th>Marco</th>
+          <th>Evento de Pagamento</th>
+          <th style="text-align:right;">%</th>
+          <th style="text-align:right;">Valor BRL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>M0</td>
+          <td>Assinatura do contrato (kickoff)</td>
+          <td style="text-align:right;">20%</td>
+          <td style="text-align:right;">R$ 1.133.330</td>
+        </tr>
+        <tr>
+          <td>M1</td>
+          <td>Kickoff &amp; Solution Design completo — ADRs ratificados, E02 backlog inicializado, ambientes DEV provisionados (W2)</td>
+          <td style="text-align:right;">20%</td>
+          <td style="text-align:right;">R$ 1.133.330</td>
+        </tr>
+        <tr>
+          <td>M2</td>
+          <td>Onda 1 build completo — E02 (XL, Platform Events/CDC backbone) deploy em produção (W8)</td>
+          <td style="text-align:right;">25%</td>
+          <td style="text-align:right;">R$ 1.416.662</td>
+        </tr>
+        <tr>
+          <td>M3</td>
+          <td>Onda 2+3 builds completos para UAT — E03–E12 excl. E06/E16 entregues em sandbox (W16)</td>
+          <td style="text-align:right;">25%</td>
+          <td style="text-align:right;">R$ 1.416.662</td>
+        </tr>
+        <tr>
+          <td>M4</td>
+          <td>Go-Live + Hypercare concluído (W20)</td>
+          <td style="text-align:right;">10%</td>
+          <td style="text-align:right;">R$ 566.664</td>
+        </tr>
+        <tr>
+          <td colspan="2"><strong>Total</strong></td>
+          <td style="text-align:right;"><strong>100%</strong></td>
+          <td style="text-align:right;"><strong>R$ 5.666.648</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>O que está incluído</h3>
+    <ul class="prop">
+      <li>10 épicos do Fixed Fee (E02–E12 excl. E06, Ondas 1–3): E02 (Backbone PE/CDC), E03 (SLA Data Cloud), E04 (Padronização de Tabulação), E05 (Status de Fechamento), E07 (Visibilidade de Capacidade), E08 (Identidade Assessores), E09 (Deduplicação), E10 (Rastreabilidade E2E), E11 (Omni-Channel Sistêmico), E12 (Consolidação de Canais de Entrada)</li>
+      <li>9 papéis de entrega: Sr PM, Sr Solution Architect, Sr Technical Architect, Sr Developer, Developer, QA Consultant, HCC Consultant, Sr Data Cloud Architect, Sr Agentforce Consultant</li>
+      <li>Ambientes DEV, UAT e PROD — configuração de pipeline CI/CD completo</li>
+      <li>Documentação técnica de todos os entregáveis + materiais de treinamento e adoção</li>
+      <li>2 semanas de hypercare pós-go-live</li>
+    </ul>
+
+    <h3>O que não está incluído</h3>
+    <ul class="prop">
+      <li>E01 (Limites de Governança da Plataforma) — coberto pelo PS Discovery já engajado no BTG</li>
+      <li>E06 (Integração com ITSM existente do BTG, L) — endereçado pela Salesforce PS em proposta separada, atualmente em fase de RFP</li>
+      <li>E16 (Chinese Wall / Modelo de Compartilhamento, XL) — decisão de modelo de compartilhamento OWD pendente; será endereçado em etapa subsequente após resolução</li>
+      <li>Convergência (E13–E17) — requer gate estratégico BTG; não incluída neste Fixed Fee</li>
+      <li>Viagens e despesas — faturadas como custo real, separadamente, conforme incorridas</li>
+      <li>Licenças de software Salesforce (Data Cloud, Agentforce, Salesforce Shield) — responsabilidade do BTG</li>
+      <li>Ouvidoria — não coberta por este SOW; requer épico ou change order separado se necessário</li>
+      <li>Banco PAN — org separada, fora do escopo deste contrato</li>
+      <li>Remediação de débito técnico que exceda o cap definido no Solution Design (M1, W2) — sujeito a change order</li>
+    </ul>
+
+    <div class="callout callout-ok">
+      <p><strong>Por que Fixed Fee funciona aqui:</strong> a maior fonte de variação em projetos Salesforce brownfield é o débito técnico não descoberto. Resolvemos isso com o Solution Design &amp; Finalização de ADRs (M1, W2) antes de qualquer build — o cap de remediação de débito técnico é definido e ratificado pelo BTG antes do início da Onda 1. O que está fora do cap é transparente e change-order-controlado, não uma surpresa no final do projeto.</p>
+    </div>
+
+    <div style="margin-top:20px;border:2px solid #0070d2;border-left:6px solid #0070d2;background:#e8f4ff;padding:20px 24px;border-radius:8px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;color:#0070d2;text-transform:uppercase;margin-bottom:10px;">Aviso Estratégico — Proposta ITSM em Paralelo</div>
+      <p style="margin:0 0 10px;font-size:16px;font-weight:700;color:#032d60;">Esta proposta e a frente ITSM (E06) são complementares — não concorrentes. Ambas requerem uma decisão coordenada.</p>
+      <p style="margin:0;font-size:13px;color:#444;line-height:1.6;">A Salesforce Professional Services está desenvolvendo, em resposta ao processo de RFP do BTG, uma proposta separada para a integração com o ITSM existente (E06). Os épicos E05 e E07 desta proposta têm dependência arquitetural de E06. O alinhamento entre as duas frentes ocorrerá no Solution Design (M1, W2) — garantindo que os dois escopos formem uma solução coesa. A decisão sobre ambas as frentes deve ser feita em conjunto.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 7 — POR QUE A SALESFORCE PROFESSIONAL SERVICES ══════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-eyebrow">Por Que Nós</div>
+    <h2 class="section-title">Já estamos dentro do seu ambiente. Nenhum outro parceiro pode dizer isso.</h2>
+  </div>
+  <div class="section-body">
+    <p>Qualquer consultor pode ler uma documentação de produto e montar uma proposta. O que nenhum outro parceiro tem é o que nós já construímos: conhecimento direto, atual e verificável do ambiente BTG Pactual.</p>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-card-title">Conhecemos sua arquitetura</div>
+        <p>Estamos atualmente engajados no PS Discovery do BTG. Sabemos o volume real de débito técnico da org COR, a postura de compliance BACEN, o estado dos ambientes e as decisões arquiteturais que estão em aberto. Um parceiro novo gasta 6 a 8 semanas descobrindo isso. Nós já temos.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-title">Conhecemos seus stakeholders</div>
+        <p>Temos relacionamento ativo com BTG IT Security, BTG Compliance e as equipes técnicas internas. Os ADRs que precisam ser resolvidos já têm owners identificados porque nós os identificamos. Isso não é vantagem marginal — é semanas de rampa que o BTG não vai pagar.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-title">O menor risco disponível</div>
+        <p>Em um projeto FSI com BACEN, LGPD e SOX como restrições não-negociáveis, risco de implementação é risco de compliance. A equipe que já operou dentro dessas restrições no seu ambiente é estruturalmente mais segura do que qualquer equipe que está começando do zero — independente do preço.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-title">Somos o fabricante</div>
+        <p>Quando algo não funciona como esperado — uma nuance de governor limit, um comportamento de plataforma em release preview, uma interação entre Agentforce e Einstein Trust Layer em um contexto regulado — a equipe PS tem acesso direto ao produto que nenhum parceiro certificado tem. Isso muda a velocidade de resolução de problemas em produção.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:20px;">A soma desses quatro pontos não é um argumento de marketing. É uma eliminação de risco que tem valor financeiro real para o BTG. Uma equipe nova neste ambiente vai gastar pelo menos 4 a 6 semanas em descoberta que nós já fizemos — e provavelmente cobrar por isso. O custo da alternativa é mais alto do que parece no headline de proposta.</p>
+  </div>
+</div>
+
+<!-- ══ SEÇÃO 8 — PRÓXIMOS PASSOS ══════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-eyebrow">Próximos Passos</div>
+    <h2 class="section-title">Uma decisão. Uma data. Um compromisso.</h2>
+  </div>
+  <div class="section-body">
+    <div class="next-card">
+      <p>Nossa proposta é válida por <strong>30 dias</strong> a partir da data deste documento. Se houver qualquer questão sobre escopo, estrutura de pagamento ou cronograma, estamos disponíveis para uma sessão de alinhamento com o time BTG antes da decisão — sem compromisso. O que não fazemos é alterar o preço ou o escopo após a assinatura por ambiguidades arquiteturais que o Solution Design (M1, W2) vai revelar. É exatamente para isso que esse gate existe.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 9 — CTO ADD-ON ══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <div class="section-eyebrow">Add-on Estratégico — Opcional</div>
+    <h2 class="section-title">Um CTO Salesforce dedicado. Governança contínua, sem lacunas entre o go-live e o próximo salto.</h2>
+  </div>
+  <div class="section-body">
+
+    <div style="background:linear-gradient(135deg,#001E5B 0%,#022AC0 100%);border-radius:10px;padding:28px 32px;margin-bottom:28px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:rgba(0,179,255,.06);pointer-events:none;"></div>
+      <div style="font-family:var(--font-h);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sf-cloud);margin-bottom:12px;">Oferta Premium · Apresentada Separadamente</div>
+      <div style="font-family:var(--font-h);font-size:22px;color:#fff;line-height:1.3;margin-bottom:16px;">1 CTO Full-time Salesforce<br><span style="color:rgba(255,255,255,.7);font-size:16px;">Período: 12 meses · Início: pós go-live da Fase 4 · Time &amp; Material</span></div>
+      <div style="display:flex;gap:32px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;align-items:flex-start;">
+        <div style="text-align:center;">
+          <div style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Valor mensal</div>
+          <div style="font-size:36px;font-weight:700;color:#fff;font-family:var(--font-h);line-height:1;">R$ 165.500</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:4px;">por mês</div>
+        </div>
+        <div style="font-size:20px;color:rgba(255,255,255,.25);align-self:center;font-weight:300;padding-top:4px;">·</div>
+        <div style="text-align:center;">
+          <div style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Estimativa total · 12 meses</div>
+          <div style="font-size:36px;font-weight:700;color:#fff;font-family:var(--font-h);line-height:1;">R$ 1.986.000</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:4px;">T&amp;M · faturado pelas horas consumidas</div>
+        </div>
+      </div>
+      <div style="font-size:13px;color:rgba(255,255,255,.75);background:rgba(255,255,255,.08);border-radius:6px;padding:12px 16px;text-align:left;">
+        O CTO ficará alocado full-time no BTG durante 12 meses, garantindo continuidade arquitetural, governança técnica do ambiente Salesforce pós go-live e prontidão para os próximos sprints da Convergência (E13–E17).
+      </div>
+    </div>
+
+    <p>O go-live da Fase 4 não encerra o risco arquitetural — ele transfere a governança para dentro do BTG. Um CTO Salesforce dedicado garante que a evolução pós-implementação siga as mesmas decisões arquiteturais que fundamentaram o escopo entregue: nenhuma sobreposição de configuração, nenhuma deriva de plataforma, nenhuma lacuna entre o que foi construído e o que vem a seguir.</p>
+
+    <h3>O que este recurso entrega</h3>
+    <ul class="prop">
+      <li><strong>Governança arquitetural contínua</strong> — supervisão das decisões técnicas no ambiente de produção, prevenindo retrabalho causado por configurações que contradizem os ADRs ratificados no Solution Design.</li>
+      <li><strong>Evolução planejada para a Convergência</strong> — os épicos E13–E17 (gated nesta proposta) requerem arquitetura sólida como base. O CTO mantém o ambiente pronto para esses próximos sprints sem necessidade de redescoberta.</li>
+      <li><strong>Mitigação de risco pós-go-live</strong> — presença sênior durante o período mais crítico: os primeiros 12 meses em produção, quando a operação ainda está calibrando os novos fluxos e quando P1s têm impacto regulatório BACEN real.</li>
+      <li><strong>Gestão de roadmap Salesforce</strong> — 3 releases por ano. O CTO avalia cada release contra o ambiente BTG, identifica o que aproveitar e o que blindar, e mantém a plataforma alinhada à estratégia do banco.</li>
+      <li><strong>Interlocução com BTG IT, Compliance e Negócio</strong> — ponto único de autoridade técnica Salesforce para as equipes internas, liberando a equipe de TI do BTG de gerenciar a curva de aprendizado contínua da plataforma.</li>
+    </ul>
+
+    <h3>Por que considerar agora</h3>
+    <p>A decisão de engajar um CTO Salesforce é mais barata antes da Convergência do que depois. Os épicos E13–E17 (automação de e-mail SOMA, consolidação de canais, AI avançada) exigem que a arquitetura de produção esteja coerente e documentada. Um ambiente derivado de 12 meses de operação sem governança técnica sênior cria retrabalho mensurável na Convergência — retrabalho que o Fixed Fee desta proposta não cobre.</p>
+
+    <div class="callout callout-info">
+      <p><strong>Este add-on não altera o escopo ou o valor do Fixed Fee desta proposta.</strong> É uma oferta independente, com proposta e contrato próprios, apresentada aqui para que o BTG possa avaliar o ciclo completo de proteção do investimento — não apenas a entrega inicial.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════════════════════ -->
+<div class="footer">
+  <p>Este documento é confidencial e preparado exclusivamente para o Banco BTG Pactual S.A. Salesforce Professional Services LATAM Brazil · Setembro 2026.</p>
+  <p>E01 Architecture Assessment (advisory) não incluído no escopo — equipe PS já engajada no cliente. Valores indicativos para fins de planejamento; estrutura comercial final confirmada pelo contrato aplicável. Viagens e despesas faturadas como custo real e não incluídas nesta estimativa. Taxa de câmbio de referência R$5,75/USD.</p>
+  <p>E09 (Data Cloud) e E10 (Agentforce/SOMA) são condicionais à confirmação de licenciamento (ADR-06 e ADR-07 respectivamente) antes da semana 5 do programa. O valor do Fixed Fee não é afetado; apenas o cronograma e o benefício realizado variam conforme resolução dos gates.</p>
+</div>
+
+</div><!-- /page-wrap -->
+</body>
+</html>
